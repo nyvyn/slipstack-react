@@ -2,6 +2,7 @@
   "name": "slipstack-react",
   "version": "0.0.0-semantic-release",
   "description": "Beautiful, sliding, stacking panes for React – inspired by Andy Matuschak’s sliding-pane notes UI.",
+  "packageManager": "pnpm@11.8.0",
   "license": "MIT",
   "author": "nyvyn",
   "repository": {
@@ -23,10 +24,11 @@
     "dist"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=22",
+    "pnpm": ">=11.8.0"
   },
   "scripts": {
-    "commit": "git add -p && cz",
+    "commit": "git add -p && pnpm exec cz",
     "dev": "tsup --watch",
     "build": "tsup",
     "semantic-release": "semantic-release",
@@ -34,7 +36,7 @@
     "test:watch": "vitest --watch",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "prepare": "husky",
-    "update scripts": "npx npm-check-updates -u"
+    "update:scripts": "pnpm dlx npm-check-updates -u"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -105,7 +107,7 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+      "prepare-commit-msg": "exec < /dev/tty && pnpm exec cz --hook || true"
     }
   }
 }
