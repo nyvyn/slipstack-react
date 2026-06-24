@@ -57,8 +57,8 @@ Run the demo application from the `example` folder:
 
 ```bash
 cd example
-pnpm install
-pnpm dev
+corepack pnpm install
+corepack pnpm dev
 ```
 
 ## API
@@ -114,13 +114,13 @@ Calling `openPane(next)` appends *next* to the right of the calling pane and rem
 PRs and issues are welcome. Run the dev setup with:
 
 ```bash
-pnpm install
-pnpm test
+corepack pnpm install
+corepack pnpm test
 ```
 
-This repository uses pnpm with install scripts disabled. If a dependency adds an
-install script, treat it as a supply-chain review item before changing that
-policy.
+This repository uses pnpm through Corepack, with install scripts disabled. If a
+dependency adds an install script, treat it as a supply-chain review item before
+changing that policy.
 
 ## Acknowledgements
 
