@@ -2,6 +2,7 @@
   "name": "slipstack-react",
   "version": "0.0.0-semantic-release",
   "description": "Beautiful, sliding, stacking panes for React – inspired by Andy Matuschak’s sliding-pane notes UI.",
+  "packageManager": "pnpm@11.8.0",
   "license": "MIT",
   "author": "nyvyn",
   "repository": {
@@ -19,22 +20,30 @@
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
   "files": [
     "dist"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=22",
+    "pnpm": ">=11.8.0"
   },
   "scripts": {
-    "commit": "git add -p && cz",
-    "dev": "tsup --watch",
-    "build": "tsup",
+    "commit": "git add -p && pnpm exec cz",
+    "dev": "vite build --watch",
+    "build": "vite build && tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json",
     "semantic-release": "semantic-release",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "prepare": "husky",
-    "update scripts": "npx npm-check-updates -u"
+    "update:scripts": "pnpm dlx npm-check-updates -u"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -46,6 +55,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@eslint/js": "^9.30.0",
+    "@testing-library/dom": "^10.0.0",
     "@testing-library/jest-dom": "^6.1.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.4.3",
@@ -57,11 +67,13 @@
     "husky": "^9.0.0",
     "jsdom": "^26.1.0",
     "lint-staged": "^16.1.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "semantic-release": "^25.0.2",
-    "tsup": "^8.0.0",
+    "tsc-alias": "^1.8.17",
     "typescript": "^5.5.0",
     "typescript-eslint": "^8.35.0",
-    "vite-tsconfig-paths": "^5.1.4",
+    "vite": "^8.1.0",
     "vitest": "^4.1.9"
   },
   "plugins": [
@@ -105,7 +117,7 @@
   },
   "husky": {
     "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+      "prepare-commit-msg": "exec < /dev/tty && pnpm exec cz --hook || true"
     }
   }
 }
